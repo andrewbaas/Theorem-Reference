@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}
+
+\renewcommand{\thesection}{Chapter \Roman{section}}
+\renewcommand{\thesubsection}{\S \arabic{subsection}}
+
+% Define the itemrange command for ranges of lists
+\def\itemrange#1{%
+\addtocounter{enumi}{1}%
+\edef\labelenumi{\theenumi--\noexpand\theenumi.}%
+\addtocounter{enumi}{-2}%
+\addtocounter{enumi}{#1}%
+\item
+\def\labelenumi{\theenumi}}
+
+% Add propositional logic-specific symbols
+\renewcommand{\land}{\&}
+\newcommand{\implies}{\supset}
+
+
+\begin{document}
+
+\setcounter{section}{3}
+\section{}
+
+\setcounter{subsection}{16}
+\subsection{Formation Rules}
+
+\begin{definition}
+    A \textit{term} is:
+    \begin{enumerate}
+        \item 0 is a term
+        \item A variable is a term
+        \itemrange{3} If s and t are terms, then the following are terms:\\
+            (s)$+$(t), (s)$\cdot$(t), and (s)'
+        \item The only terms are those defined by these rules
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Given terms s and t, a \textit{formula} is:
+    \begin{enumerate}
+        \item (s)=(t)
+        \itemrange{4} If A and B are formulas, then the following are formulas:\\
+            (A)$\implies$(B), (A)$\land$(B), (A)$\lor$(B), and $\neg$(A)
+        \itemrange{4} For term x and formula A, the following are formulas:\\
+            $\forall$x(A) and $\exists$x(A)
+        \item The only formulas are those defined by these rules
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Some helpful definitions are as follows:
+    \begin{itemize}
+        \item $\implies, \land, \lor, \neg, \forall x, \exists x, =, +, \cdot, '$ are all \emph{operators}
+        \item The \emph{scope} of an operator is the one or two formulas associated with it 
+        \item The following symbols are all \emph{logical operators}
+        \item \emph{Propositional connectives} are the symbols $\implies, \land, \lor, \neg$
+        \item \emph{quantifiers} are $\forall x, \exists x$, with $\forall x$ as the \emph{universal quantifier} and $\exists x$ as the \emph{existential quantifier}
+    \end{itemize}
+\end{definition}
+
+\setcounter{lemma}{3}
+
+\begin{lemma}{Uniqueness of Operator Scope in an Expression}
+
+    For a given term or formula (with defined operator scopes), there exists a proper pairing of parentheses such that the scope satisfies the following two rules:
+    \begin{enumerate}[label=(\alph*)]
+        \item \textbf{One-Expression Operators}: The scope of the operator is within paired parenthesis, and (depending on the operator) the operator is either immediately to the right of the right parenthesis or to the left of the left parenthesis.
+        \item \textbf{Two-Expression Operators}: The scope of the operator is immediately within two pairs of parentheses such that the right parenthesis of the left expression and the left parenthesis of the right expression border the operator.
+    \end{enumerate}
+\end{lemma}
+
+\subsection{Free and Bound Variables}
+
+\begin{definition}
+    An occurence of a variable x in a formula A is \emph{bound} if x is in a quantifier or scope of a quantifier $\exists$x or $\forall$x. Otherwise, the occurence is \emph{free}.
+
+    If x occurs in A as a free variable, we say x \emph{is a free variable of} A or A \emph{contains} x \emph{as a free variable}.
+\end{definition}
+
+\begin{definition}
+    The \emph{substitution} of a term t for a variable x in a formula or term A means that t will relpace every free occurence of x in A.
+\end{definition}
+
+
+\end{document}
